@@ -1,0 +1,107 @@
+.journalist-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.publish-card {
+  padding: 2rem;
+}
+
+.publish-card form {
+  gap: 1.5rem;
+}
+
+.publish-card .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.publish-card label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.publish-card input,
+.publish-card textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.publish-card textarea {
+  min-height: 300px;
+}
+
+.publish-card input:focus,
+.publish-card textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.char-count {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+.publish-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.05rem;
+}
+
+.tips-card {
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+}
+
+.tips-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.tips-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tips-card li {
+  padding: 0.75rem 0;
+  color: #555;
+  padding-right: 1.5rem;
+  position: relative;
+}
+
+.tips-card li:before {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .journalist-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .publish-card textarea {
+    min-height: 200px;
+  }
+
+  .publish-btn {
+    padding: 0.75rem;
+  }
+}
