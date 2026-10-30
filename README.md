@@ -1,16 +1,16 @@
-# مشروع أخبار العالم
+# World News Project
 
-تطبيق أخبار بواجهة React وVite وخادم Python Sanic، مع تسجيل دخول وأدوار للمستخدم والصحفي والمسؤول، وإمكانية حفظ الأخبار المفضلة.
+A news application featuring a React and Vite frontend and a Python Sanic backend. It includes user authentication with roles for regular users, journalists, and administrators, as well as the ability to save favorite news articles.
 
-## المتطلبات
+## Requirements
 
-- Python 3.10 أو أحدث
-- Node.js 20.19+ أو 22.12+
+- Python 3.10 or later
+- Node.js 20.19+ or 22.12+
 - npm
 
-## تشغيل الخادم الخلفي
+## Running the Backend Server
 
-من مجلد المشروع:
+From the project directory:
 
 ```powershell
 cd news-backend
@@ -21,26 +21,26 @@ $env:JWT_SECRET_KEY = python -c "import secrets; print(secrets.token_hex(32))"
 python app.py
 ```
 
-الخادم يعمل افتراضيًا على `http://localhost:8000`، وينشئ قاعدة بيانات SQLite محلية عند التشغيل. لا ترفع ملف قاعدة البيانات أو تضع بيانات حقيقية فيه.
+The server runs by default at `http://localhost:8000` and creates a local SQLite database upon startup. Do not upload the database file or store real data within it.
 
-لإتاحة الواجهة من عنوان آخر، عيّن `CORS_ORIGINS` إلى أصل الواجهة المسموح، مثل `https://news.example.com`. يمكن تعيين `PORT` لتغيير المنفذ. لا تفعّل `SANIC_DEBUG` في بيئة منشورة.
+To allow access from a different origin, set `CORS_ORIGINS` to the permitted frontend origin (e.g., `https://news.example.com`). You can also set `PORT` to change the port number. Do not enable `SANIC_DEBUG` in a production environment.
 
-### بيانات تجريبية اختيارية
+### Optional Sample Data
 
-ينشئ `seed_data.py` مستخدمين وأخبارًا تجريبية. عيّن كلمات مرور خاصة بك قبل تشغيله؛ لا توجد كلمات مرور تجريبية افتراضية:
+The `seed_data.py` script generates sample users and news articles. Please set your own passwords before running it. There are no default seed passwords:
 
 ```powershell
-$env:SEED_ADMIN_PASSWORD = "ضع-كلمة-مرور-قوية-هنا"
-$env:SEED_JOURNALIST_PASSWORD = "ضع-كلمة-مرور-قوية-هنا"
-$env:SEED_USER_PASSWORD = "ضع-كلمة-مرور-قوية-هنا"
+$env:SEED_ADMIN_PASSWORD = "set-a-strong-password-here"
+$env:SEED_JOURNALIST_PASSWORD = "set-a-strong-password-here"
+$env:SEED_USER_PASSWORD = "set-a-strong-password-here"
 python seed_data.py
 ```
 
-التسجيل العام ينشئ حساب مستخدم عادي فقط. أنشئ حساب المسؤول محليًا عبر أداة البيانات التجريبية بعد تعيين كلمة مرور قوية، أو عبر وسيلة إدارية موثوقة.
+Public registration only creates a standard user account. Create the administrator account locally using the seed data tool—after setting a strong password—or via another trusted administrative method.
 
-## تشغيل الواجهة
+## Running the Frontend
 
-في نافذة طرفية أخرى:
+In a separate terminal window:
 
 ```powershell
 cd news-frontend
@@ -48,13 +48,13 @@ npm ci
 npm run dev
 ```
 
-الواجهة تعمل افتراضيًا على `http://localhost:5173` وتتصل بالخادم على `http://localhost:8000`. لتغيير عنوان API، أنشئ `news-frontend/.env.local` واضبط:
+The frontend runs by default at `http://localhost:5173` and connects to the backend at `http://localhost:8000`. To change the API URL, create a `news-frontend/.env.local` file and set:
 
 ```dotenv
 VITE_API_URL=https://api.example.com
 ```
 
-## الفحوصات والبناء
+## Linting and Building
 
 ```powershell
 cd news-frontend
@@ -62,16 +62,9 @@ npm run lint
 npm run build
 ```
 
-ولفحص صياغة ملفات Python:
+To check the syntax of the Python files:
 
 ```powershell
 cd news-backend
 python -m py_compile app.py main.py seed_data.py security.py
 ```
-
-## ملاحظات قبل النشر
-
-- لا ترفع `.env` أو قاعدة بيانات محلية أو بيئات Python وNode.
-- اضبط `JWT_SECRET_KEY` كمتغير بيئة قوي وفريد في بيئة الاستضافة.
-- عيّن `CORS_ORIGINS` إلى نطاق الواجهة الفعلي، ولا تستخدم وضع التصحيح في الإنتاج.
-- قاعدة البيانات SQLite محلية ومناسبة للتطوير؛ اختر قاعدة بيانات مُدارة قبل النشر العام أو الاستخدام متعدد النسخ.
